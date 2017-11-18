@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% form_theme formRdv 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    <div class="row" style="margin-top:2em">
+    <div class="col-sm-6">
+        {% include 'rdvclient/_form.rdv.html.twig' with { 'formRdv':formRdv, 'rdv': rdv, '_locale':app.request.locale  } only %}
+    </div>
+    {% include 'affiliate/__show.location.html.twig' with {'affiliate':rdv.semaine.agenda.affiliate,'_locale':app.request.locale } only %}  
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% form_theme formRdv 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    <div class="row" >
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Prise de rendez-vous le {{ rdv.dateDebut | localizeddate('full', 'none') }} à {{ rdv.dateHeureDebut | localizeddate('none', 'short') }}
+                <br/>{{ rdv.semaine.company.nom }} - {{ rdv.semaine.agenda.affiliate.nom }}
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    {% include 'rdvclient/_form.rdv.html.twig' with { 'formRdv':formRdv, 'rdv': rdv, '_locale':app.request.locale  } only %}
+                </div>
+                <div style="margin-top:3em">
+                {% include 'affiliate/__show.location.html.twig' with {'affiliate':rdv.semaine.agenda.affiliate,'_locale':app.request.locale } only %}  
+                </div>
+            </div >
+        </div >
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8uB2Ubq-tuXDQuRCsRPeCoDOBMip9vLE&callback=myMap{{rdv.semaine.agenda.affiliate.id}}"></script>
+
+    </div>
+{% endblock %}
+
+

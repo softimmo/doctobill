@@ -1,0 +1,57 @@
+<!-- semaine:_form.rdv.htm.twig -->
+    {{ form_start(formRdv) }}
+    {{ form_errors(formRdv) }}
+        <div class="panel-body">
+            <div class="row " >
+                <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.evenementType) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.evenementType) }}
+                        <span class="error-inline">{{ form_errors(formRdv.evenementType) }}</span>
+                    </div>
+                </div>
+                <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.nom) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.nom) }}
+                        <span class="error-inline">{{ form_errors(formRdv.nom) }}</span>
+                    </div>
+                </div>
+                <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.prenom) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.prenom) }}
+                        <span class="error-inline">{{ form_errors(formRdv.prenom) }}</span>
+                    </div>
+                </div>
+                <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.dateNaissance) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.dateNaissance) }}
+                        <span class="error-inline">{{ form_errors(formRdv.dateNaissance) }}</span>
+                    </div>
+                </div>                
+                  <hr/>
+                 <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.telephone) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.telephone) }}
+                        <span class="error-inline">{{ form_errors(formRdv.telephone) }}</span>
+                    </div>
+                </div>
+                 <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.email) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.email) }}
+                        <span class="error-inline">{{ form_errors(formRdv.email) }}</span>
+                    </div>
+                </div>    
+                <div class="form-bb">
+                    <div class="col-sm-4">{{ form_label(formRdv.message) }}</div>
+                    <div class="col-sm-8">{{ form_widget(formRdv.message) }}
+                        <span class="error-inline">{{ form_errors(formRdv.message) }}</span>
+                    </div>
+                </div>       
+            </div>
+                <div class="col-sm-offset-4" style="padding: 10px 15px;">
+                    <div class="text-center"  >{{ form_widget(formRdv.save) }}</div>
+            </div>
+                    
+        </div>
+    {{ form_end(formRdv) }}
+
+

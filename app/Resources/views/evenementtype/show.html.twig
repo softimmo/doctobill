@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Evenementtype</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ evenementType.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenementType.description }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ evenementType.duration }}</td>
+            </tr>
+            <tr>
+                <th>Acceptvisite</th>
+                <td>{% if evenementType.acceptVisite %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Accessibleclient</th>
+                <td>{% if evenementType.accessibleClient %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Accessiblenewclient</th>
+                <td>{% if evenementType.accessibleNewClient %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Colorcode</th>
+                <td>{{ evenementType.colorCode }}</td>
+            </tr>
+            <tr>
+                <th>Recommendation</th>
+                <td>{{ evenementType.recommendation }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if evenementType.createdAt %}{{ evenementType.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if evenementType.updatedAt %}{{ evenementType.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenementType.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('evenementtype_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('evenementtype_edit', { 'id': evenementType.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

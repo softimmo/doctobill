@@ -1,0 +1,15 @@
+Madame, Monsieur,
+<p>
+Votre rendez-vous du {{ rdv.dateDebut  |  localizeddate('full', 'none')  }} à {{ rdv.dateHeureDebut | date('H:i')}} a bien été enregistré chez le {{rdv.semaine.company.nom }} {{rdv.semaine.agenda.affiliate.nom }}
+</p>
+<p>
+Notre secrétariat prendra contact avec vous par mail ou par téléphone au {{ rdv.telephone }} pour vous confirmer le rendez-vous.
+</p>
+Très cordialement
+<br/>
+Secrétariat du {{rdv.semaine.company.nom }} 
+<p>
+Si vous souhaitez modifier ou annuler ce RV, vous pouvez aussi téléphoner au {{rdv.semaine.company.telephone }}. 
+<br/>
+{{ rdv.semaine.company.horaire }}
+</p>

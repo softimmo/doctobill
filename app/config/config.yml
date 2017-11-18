@@ -1,0 +1,105 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+parameters:
+    locale: fr
+    
+framework:
+    #esi: 
+    translator: { fallbacks: [%locale%] }   
+    secret:          "%secret%"
+    
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        form:
+            resources:
+                - 'AppBundle:Form' # pour utiliser un "form_themes" bootstrap
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+        - 'bootstrap_3_horizontal_layout.html.twig'
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: rdvorl # specify the connexion used by default
+        connections:
+            rdvorl:
+                driver:   pdo_mysql
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+
+    orm:
+        default_entity_manager:   rdvorlEm
+        entity_managers:
+            rdvorlEm:
+                connection:       rdvorl
+                mappings:
+                    AppBundle: ~
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+#sonata_block:
+#    default_contexts: [cms]
+#    blocks:
+#        sonata.admin.block.admin_list:
+#            contexts:   [admin]
+
+#        sonata.block.service.text:
+#        sonata.block.service.action:
+#        sonata.block.service.rss:
+
+# FOSRestBundle
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: true
+        formats:
+            xml: true
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+        include_format: false

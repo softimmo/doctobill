@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include 'affiliate/index.html.twig' with { 'company':company , '_locale':app.request.locale  } only %}
+        
+{% endblock %}

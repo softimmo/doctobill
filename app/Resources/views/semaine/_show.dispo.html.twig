@@ -1,0 +1,63 @@
+<!-- semaine:_show.dispo.html.twig -->
+<div class="container-fluid">
+    <div class="row clearfix text-center">
+        <div class="col-sm-1">Lun.</div>             
+        <div class="col-sm-1">Mar.</div>             
+        <div class="col-sm-1">Mer.</div>             
+        <div class="col-sm-1">Jeu.</div>             
+        <div class="col-sm-1">Ven.</div>             
+        <div class="col-sm-1">Sam.</div>             
+    </div>
+    {% for semainePlage in semaine.rdvs %}
+        <div class="row clearfix text-center" style="padding:0.2em">
+            <div class="col-sm-1">
+                {% if semainePlage.monday %}
+                    {% set dateJour=semaine.dateDebut%}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>             
+            <div class="col-sm-1">
+                {% if semainePlage.tuesday %}
+                    {% set dateJour=semaine.dateDebut|date_modify("+1 day") %}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>             
+            <div class="col-sm-1">
+                {% if semainePlage.wednesday %}
+                    {% set dateJour=semaine.dateDebut|date_modify("+2 day") %}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-sm-1">
+                {% if semainePlage.thursday %}
+                    {% set dateJour=semaine.dateDebut|date_modify("+3 day") %}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-sm-1">
+                {% if semainePlage.friday %}
+                    {% set dateJour=semaine.dateDebut|date_modify("+4 day") %}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-sm-1">
+                {% if semainePlage.saturday %}
+                    {% set dateJour=semaine.dateDebut|date_modify("+5 day") %}
+                    <a href="{{ path('evenement_new', { 'id': semainePlage.id ,'date':dateJour|date('Ymd'),'h':semainePlage.debut|date('H:i')  }) }}">
+                        <button class="btn btn-primary btn-sm" >{{ semainePlage.debut  |date('H:i') }}</button>
+                    </a>
+                {% endif %}
+            </div>
+    </div>
+        {% endfor %}
+</div>

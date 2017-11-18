@@ -1,0 +1,22 @@
+<!-- semaine:_form.rdv.htm.twig -->
+<div class="">
+    {{ form_start(formRdv, {'action': path('rdv_new', { 'id': semaine.id }), 'method': 'POST'}) }}
+    {{ form_errors(formRdv) }}
+    <div class="form-bb">
+        <div class="col-sm-2">{{ form_label(formRdv.dateDebut) }}</div>
+        <div class="col-sm-4">{{ form_widget(formRdv.dateDebut) }}</div>
+        <div class="col-sm-3">{{ form_label(formRdv.dateHeureDebut) }}</div>
+        <div class="col-sm-3">{{ form_widget(formRdv.dateHeureDebut) }}
+            <span class="error-inline">{{ form_errors(formRdv.dateHeureDebut) }}</span>
+        </div>
+    </div>
+
+    <div class="col-sm-12 row " >
+        <div class="form-bb">
+            <div class="col-sm-3 pull-right">{{ form_widget(formRdv.save) }}</div>
+        </div>
+    </div>
+    {{ form_end(formRdv) }}
+
+</div>
+

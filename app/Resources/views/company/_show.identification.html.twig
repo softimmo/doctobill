@@ -1,0 +1,25 @@
+<!-- company/_show.identification.html.twig -->
+
+<div class="panel panel-primary col-sm-4">
+    <div class="panel-heading">Centre médical </div>
+    <div class="panel-body">
+        <h2>{{ company.nom }}</h2>
+            {{ company.convention }}
+        <hr/>
+            Téléphone : {{ company.telephone }}
+            <br/>
+            {{ company.horaire }}
+    </div>
+</div>
+{% for affiliate in company.affiliates %}
+    {% include 'affiliate/__show.location.html.twig' with {'affiliate':affiliate,'_locale':app.request.locale } only %}   
+{% endfor %}
+<script>
+     function initMap() {
+{% for affiliate in company.affiliates %}
+        myMap{{ affiliate.id }}();
+{% endfor %}
+     }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8uB2Ubq-tuXDQuRCsRPeCoDOBMip9vLE&callback=initMap"></script>
+

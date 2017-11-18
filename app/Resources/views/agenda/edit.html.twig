@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% form_theme edit_form 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    <fieldset class="col-sm-12">
+            <legend class="well" >
+                <span class="col-sm-1"><img src="{{ asset('media/icones/edit.png') }}" alt="" /></span>
+                Agenda  {{ agenda.libelle}} de {{ agenda.affiliate.nom }}
+            </legend>
+            <div class="col-sm-12 text-center well">
+                <a href="{{ path('semaine_new', { 'id': agenda.id }) }}" class="btn btn-success btn-lg">Nouvelle semaine</a>
+            </div>
+        </fieldset>
+        {{ form_start(edit_form) }}
+        {% include 'agenda/_form.agenda.html.twig' with { 'form':edit_form, 'agenda':agenda , '_locale':app.request.locale  } only %}
+        {{ form_end(edit_form) }}
+    {% endblock %}

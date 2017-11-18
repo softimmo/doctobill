@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="google-site-verification" content="m7TjLg_OcSN4lEXKF0cMgqmFV4DVKVpr3hDTAAvJnq4" />
+        <meta name="hreflang" content="fr">       
+        <meta name="description" content="Medecin ORL dans la ville de Chambery en Savoie 73    ">
+        <meta name="author" content="soft.immo">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>{% block title %}RDV{% endblock %}</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+        <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/rdvorl.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/loading.css') }}" rel="stylesheet" >
+
+    {% block stylesheets %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>        
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+    <script src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $('.js-datepicker').datepicker();
+        });
+    </script>       
+    <script type='application/ld+json'> 
+{
+  "@context": "http://www.schema.org",
+  "@type": "MedicalClinic",
+  "name": "Barthez",
+  "url": "orl73",
+  "description": "Medecin ORL oto-rhino-laryngologie Oreille Nez Gorge",
+  "address": { 
+    "@type": "PostalAddress",
+    "streetAddress": " 1, Place de la Libération",
+    "addressLocality": "Chambéry",
+    "postalCode": "73000 ",
+    "addressCountry": "France"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "45.567193",
+    "longitude": "5.9246538"
+  },
+  "openingHours": "Mo, Tu, We, Th, Fr 09:00-18:30 Sa 09:00-08:30",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Fixe",
+    "telephone": "04 79 28 96 16"
+  }
+}
+ </script>
+{% block javascript %}{% endblock %}
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div class="container">
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div id="navigation" > 
+                {% set user = app.user %}
+                {% set company = user.company %} 
+                <nav class="navbar navbar-default navbar-fixed-top" >
+                    <div class="container-fluid"> 
+                        <div class="navbar-header"> <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7" aria-expanded="false"> 
+                                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> <span class="icon-bar"> 
+                                </span> </button> 
+                            <a style="padding:5px 0px 0px 0px; margin-left:15px" href="{{ path('logout') }}"><img src="{{ asset('/media/icones/exit.png') }}" alt="exit" /></a> 
+                        </div> 
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7"> 
+                            <ul class="nav navbar-nav"> 
+                                <li><a href="{{ path('company_edit', { 'id': company.id }) }}">{% trans %}Clinique{% endtrans %}</a></li> 
+                                <li><a href="{{ path('company_show', { 'id': company.id }) }}">{% trans %}Praticien{% endtrans %}</a></li> 
+                                <li><a href="{{ path('semaine_index', { 'id': company.id }) }}">{% trans %}Calendrier{% endtrans %}</a></li>                         
+                            </ul> 
+                        </div> 
+                    </div>
+                </nav>
+            </div>
+        {% else %}
+            {% block frise %}
+                <div id="frise"  > 
+                    <span id="slogan" ><h1 style="color:white">Rendez-vous ORL en Savoie</h1></span>
+                </div>
+            {% endblock %}  
+        {% endif %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% set logo = '/media/' ~ company.id ~ '/' ~ company.logoNom %}
+            <div id="ident">Connexion : {{ user.username }}</div>
+            <div id="logo" > <img alt="{{ company.nom }}" src="{{ asset('/media/images/logo.png') }}" /></div>
+            {% endif %}
+        <div id="floatingCirclesG" style="margin-left: 30%;">
+            <div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div>
+            <div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div>
+        </div> 
+        <div class="row form-group">
+            <div class="col-sm-12 ">
+                {% if error is defined %}<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>{% endif %}    
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">{{flash_message}}</div>
+                {% endfor %} 
+
+                {% for flash_message in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger">{{flash_message}}</div>
+                {% endfor %}
+        </div>   
+        </div>
+            {% block body %}{% endblock %}   
+    <!-- /.container -->
+
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>

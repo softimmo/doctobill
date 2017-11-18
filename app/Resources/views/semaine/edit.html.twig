@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% form_theme edit_form 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-11">Semaine {{ semaine.numero }} pour {{ semaine.agenda.affiliate.nom }} sur agenda {{ semaine.agenda.libelle }}</span>
+        </legend>
+    {% include 'semaine/_form.semaine.html.twig' with { 'form':edit_form, 'semaine':semaine , '_locale':app.request.locale  } only %}
+    </fieldset>
+
+    <div class="col-sm-4">
+            <a href="{{ path('semaine_index', { 'id': semaine.company.id }) }}">Retour vers la liste</a>
+    </div>
+    <div class="col-sm-4">
+            {% include 'semaine/_lien.rdvs.semaine.html.twig' with { 'semaine':semaine , '_locale':app.request.locale  } only %}
+     </div>
+            {{ form_start(delete_form) }}
+    <div class="col-sm-4">
+           <input type="submit" value="Supprimer"class="pull-right btn btn-warning">
+    </div>
+            {{ form_end(delete_form) }}
+{% endblock %}

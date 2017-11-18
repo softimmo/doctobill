@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme form 'form/form_login.html.twig' %}
+
+
+{% block title %}Log in to {{ app.request.host }}{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/login.css') }}" rel="stylesheet" >
+{% endblock %}
+{% block frise %}
+{% endblock %}  
+
+{% block body %}
+    <div class="col-xs-offset-3 col-xs-6 pull-center" >
+                    <div id="frise"  > 
+                        <span id="slogan" >Rendez-vous ORL</span>
+                    </div>
+        <div class="panel panel-defaul center-block">
+            <div class="panel-body">
+                {{ form_start(form) }}
+                {{ form_row(form.username, {'full_name': '_username'}) }}
+                {{ form_row(form.password, {'full_name': '_password'}) }}
+                {{ form_errors(form) }}
+                
+                </span>   
+                {{ form_end(form) }}      
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

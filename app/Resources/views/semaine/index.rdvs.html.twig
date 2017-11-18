@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% form_theme newFormRdv 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    {# semaine:index.rdvs.html.twig #}
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-11">Rendez-vous de la semaine  {{ semaine.numero }} du {{ semaine.dateDebut | date('d/m/Y')}}
+            {{ semaine.agenda.affiliate.nom }} / agenda {{ semaine.agenda.libelle }}
+            </span>
+        </legend>
+    </fieldset>
+
+    {% include 'semaine/_show.rdvs.html.twig' with { 'rdvs':semaine.rdvs, 'semaine':semaine ,'type':'4Company', '_locale':app.request.locale  } only %}
+        <div class="col-sm-6 row pull-right" >
+    {% if formRdv %}
+            <div class="panel panel-default">
+                <div class="panel-heading">Modification du Rdv {{ formRdv.vars.value.dateDebut | date('d/m/Y') }} à {{ formRdv.vars.value.dateHeureDebut | date('h:i') }}</div>
+                <div class="panel-body">
+                    {% include 'semaine/_form.rdv.html.twig' with { 'formRdv':formRdv, 'deleteFormRdv':deleteFormRdv,   '_locale':app.request.locale  } only %}
+                    {% if deleteFormRdv %}
+                        <div class="col-sm-4">
+                            {{ form_start(deleteFormRdv) }}
+                            <input type="submit" value="Supprimer"class="pull-right btn btn-warning">
+                            {{ form_end(deleteFormRdv) }}
+                        </div>
+                    {% endif %}    
+                </div>
+            </div>
+    {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Nouveau Rdv</div>
+            <div class="panel-body">
+                {% include 'semaine/_form.new.rdv.html.twig' with { 'formRdv':newFormRdv, 'deleteFormRdv':deleteFormRdv, 'semaine':semaine,  '_locale':app.request.locale  } only %}
+            </div>
+        </div>
+    </div>
+{#
+<div class="col-sm-12 text-center" >
+        <a href="{{ path('rdv_generate', { 'id': semaine.id }) }}"><button class="btn btn-warning">Regénérer les plages de rdv</button></a>
+    </div>
+#}
+{% endblock %}
+
+

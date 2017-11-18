@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-7">Listes des semaines à venir</span>
+        </legend>
+        <div class="row">
+            <div class="col-sm-4" ><label>Semaine </label></div>
+            <div class="col-sm-8" ><label>Jours de rendez-vous</label></div>
+        </div>
+        <div class="row">
+            {% for affiliate in company.affiliates %}
+                {% for agenda in affiliate.agendas %}
+                <div class="col-sm-12 well" >
+                        <a href="{{ path('affiliate_edit', { 'id': affiliate.id }) }}">{{ affiliate.nom }}</a> sur l'agenda 
+                        <a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">{{ agenda.libelle }}</a>
+                    <a href="{{ path('semaine_new', { 'id': agenda.id }) }}" class="pull-right btn btn-lg btn-success">Créer une nouvelle semaine</a>
+                </div>
+                    {% for semaine in agenda.semaines %}
+                        <div class="col-sm-4" >
+                            <a href="{{ path('semaine_edit', { 'id': semaine.id }) }}">{{ semaine.numero }} - {{ semaine.dateDebut |date('d/m/Y') }}</a>
+                        </div>
+                        <div class="col-sm-8" >
+                            {% include 'semaine/_lien.rdvs.semaine.html.twig' with { 'semaine':semaine , '_locale':app.request.locale  } only %}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <fieldset/>
+
+    {% endblock %}

@@ -1,0 +1,18 @@
+<!-- semaine:__show.rdvs.4client.htm.twig -->
+{% set classButton="btn-success" %}
+{% if not rdv.nom %}
+    <a href="{{ path('rdv_client_new', { 'id': semaine.id , 'rdv_id':rdv.id }) }}">
+        <button class="btn {{ classButton }}  text-center"> 
+            {{ rdv.dateHeureDebut | date('H:i')}}
+        </button>
+    </a>
+{#
+{% else %}
+    {% set classButton="btn-warning" %}
+    <button class="btn {{ classButton }}  text-center"> 
+        {{ rdv.dateHeureDebut | date('H:i')}}
+    </button>
+#}
+{% endif %}
+
+

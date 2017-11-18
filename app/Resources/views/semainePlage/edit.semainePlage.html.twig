@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+{# semainePlage:edit.semainePlage.html.twig #}
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-11">Définition des <a href="{{ path('agenda_edit', { 'id': semaine.agenda.id }) }}" >plages horaires</a> de la semaine  {{ semaine.numero }} du {{ semaine.dateDebut | date('d/m/Y')}}</span>
+        </legend>
+    </fieldset>
+           {{ form_start(form) }}
+        {% include 'semainePlage/_form.semainePlage.html.twig' with { 'form':form, 'semaine':semaine ,'semainePlageTypes':semainePlageTypes,  'agenda':semaine.agenda , '_locale':app.request.locale  } only %}
+                    {{ form_widget(form) }}
+            {{ form_end(form) }}
+{% endblock %}
+
+

@@ -1,0 +1,97 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use AppBundle\Entity\Semaine;
+use AppBundle\Entity\Agenda;
+use AppBundle\Entity\Rdv;
+use AppBundle\Entity\SemainePlage;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Semaine controller.
+ *
+ * @Route("rdv")
+ */
+class RdvController extends Controller
+{
+    /**
+     * Displays a form to edit an existing semaine entity.
+     *
+     * @Route("/{id}/generate", name="rdv_generate")
+     * @Method({"GET", "POST"})
+     */
+    public function generateAction(Request $request, Semaine $semaine)
+    {    
+        $logger = $this->get('logger');
+        $em=$this->getDoctrine()->getManager();
+        $logger->info('SemaineContollerloginAction....');
+
+        $semainePlage=new SemainePlage();
+        $form = $this->createForm('AppBundle\Form\SemainePlageType', $semainePlage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->semaineUpdateAction($request,$semaine);
+            return $this->redirect($this->generateUrl('rdv_edit', array('id' => $semaine->getId())));            
+        }
+
+        $agenda=$semaine->getAgenda();
+        $semainePlages = $semaine->getSemainePlages();
+        $rdvs = $semaine->getRdvs();
+
+        return $this->render('semainePlage/edit.semainePlage.html.twig', array(
+            'semaine' => $semaine,
+            'semainePlages' =>$semainePlages,
+            'form' => $form->createView()
+        ));
+    }
+
+      /**
+     * Edits an existing CalAgenda agenda.
+     *
+     * @Route("/{id}/updateSemainePlageType", name="agenda_semainePlageType_update")
+     * @Method("POST")
+     */
+    public function semaineUpdateAction(Request $request, Semaine $semaine)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $t=$this->get('translator');
+        foreach ($request->get("appbundle_semainePlage_") as $keyHeure=>$valHeure ) {
+                foreach ($valHeure as $keyJour=>$valJour) {
+                    $this->createRdv($semaine,$keyHeure,$keyJour);
+                }
+        }
+    }
+    public function createRdv(Semaine $semaine,$heure, $jour) {
+        $em = $this->getDoctrine()->getManager();
+        $rdv = new Rdv();
+        $rdv->setSemaine($semaine);
+        $dateDebut=clone $semaine->getDateDebut();
+        switch ($jour) {
+            case 'monday': break;
+            case 'tuesday':       $dateDebut=$dateDebut->modify('+1 day'); break;
+            case 'wednesday':  $dateDebut=$dateDebut->modify('+2 day');break;
+            case 'thursday':      $dateDebut=$dateDebut->modify('+3 day');break;
+            case 'friday':           $dateDebut=$dateDebut->modify('+4 day');break;
+            case 'saturdayday': $dateDebut=$dateDebut->modify('+5 day');break;
+            case 'sunday':         $dateDebut=$dateDebut->modify('+6 day');break;
+            default: break;
+        }
+        $rdv->setDateDebut($dateDebut);
+        list($hours, $minutes) = sscanf($heure, '%d:%d');
+        $intervalHeure = new \DateInterval(sprintf('PT%dH%dM', $hours, $minutes));
+        $dateHeureDebut=clone $dateDebut;
+        $dateHeureDebut->add($intervalHeure);
+//        $this->get('session')->getFlashBag()->add('notice', 'heureDebut='.$dateDebut->format('Y-m-d H:i:s')." dateHeureDebut=".$dateHeureDebut->format('Y-m-d H:i:s'));
+        $rdv->setDateHeureDebut($dateHeureDebut);
+        $rdv->setCompany($semaine->getCompany());
+        $rdv->setSemaine($semaine);
+        $em->persist($rdv);$em->flush();
+    }
+
+    
+    }

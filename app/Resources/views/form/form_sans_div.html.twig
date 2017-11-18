@@ -1,0 +1,17 @@
+{% block form_label_class -%}
+    pull-right
+{%- endblock form_label_class %}
+
+{% block form_row -%}
+    <div class="form-group {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        <div class=" {{ block('form_group_class') }}">
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+{##}</div>
+{%- endblock form_row %}
+
+{% block form_group_class -%}
+pull-left
+{%- endblock form_group_class %}

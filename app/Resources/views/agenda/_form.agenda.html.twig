@@ -1,0 +1,111 @@
+{# agenda:_form.agenda.html.twig #}
+<fieldset class="col-sm-12">
+    <legend class="well" >
+        <span class="col-sm-1"><img src="{{ asset('media/icones/edit.png') }}" alt="" /></span>
+        <span class="col-sm-7">{% trans %}Information d'indentifiation{% endtrans %}</span>
+        <span class="col-sm-4 text-right">
+            <button id="save" type="submit" class="btn btn-primary " >{% trans %}Sauvegarder{% endtrans %} <span class="glyphicon glyphicon-record" ></span></button>
+        </span>
+        {{ form_widget(form._token) }}
+
+    </legend>
+    <div class="form-group">
+        <div class="col-sm-2">{{ form_label(form.libelle) }}</div>
+        <div class="col-sm-3">{{ form_widget(form.libelle) }}
+            <span class="error-inline">{{ form_errors(form.libelle) }}</span>
+        </div>
+        <div class="col-sm-2">{{ form_label(form.duration) }}</div>
+        <div class="col-sm-1 text-center">{{ form_widget(form.duration) }}
+            <span class="error-inline">{{ form_errors(form.duration) }}</span>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-sm-2" text-center">
+             {{ form_label(form.heureDebut) }}
+    </div>
+    <div class="col-sm-3" text-center">
+         {{ form_widget(form.heureDebut) }}
+         {{ form_errors(form.heureDebut) }}  
+         <span class="error-inline">{{ form_errors(form.heureDebut) }}</span>  
+    </div>
+
+    <div class="col-sm-2 text-center">
+        {{ form_label(form.heureFin) }}
+    </div>
+    <div class="col-sm-3" text-center">
+         {{ form_widget(form.heureFin) }}
+         <span class="error-inline">{{ form_errors(form.heureFin) }}</span>   
+    </div>
+</div>
+    <br/>
+</fieldset>
+<fieldset class="col-sm-12">
+    <legend class="well" >
+        <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+        <span class="col-sm-7">{% trans %}Definition d'une semaine type{% endtrans %}</span>
+        <span class="col-sm-4 text-right">
+            <button id="save" type="submit" class="btn btn-primary " >{% trans %}Sauvegarder{% endtrans %} <span class="glyphicon glyphicon-record" ></span></button>
+        </span>
+    </legend>
+
+    <div class="form-group ">
+        <label class="col-sm-offset-1 col-sm-2 text-right" >   
+            {% trans %} {% endtrans %}
+            {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'base','_locale':app.request.locale } only %}   
+        </label>
+        <label class="col-offset-sm-2 col-sm-1 text-left ">                
+            {% trans %}lundi{% endtrans %}<br/>
+            {{ form_widget(form.monday) }}
+            {% if agenda.monday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'monday','_locale':app.request.locale } only %}
+            {% endif %}             
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}mardi{% endtrans %}<br/>
+            {{ form_widget(form.tuesday) }}
+            {% if agenda.tuesday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'tuesday','_locale':app.request.locale } only %}
+            {% endif %}             
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}mercredi{% endtrans %}<br/>
+            {{ form_widget(form.wednesday) }}
+            {% if agenda.wednesday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'wednesday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}jeudi{% endtrans %}<br/>
+            {{ form_widget(form.thursday) }}
+            {% if agenda.thursday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'thursday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}vendredi{% endtrans %}<br/>
+            {{ form_widget(form.friday) }}
+            {% if agenda.friday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'friday','_locale':app.request.locale } only %}
+            {% endif %}       
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}samedi{% endtrans %}<br/>
+            {{ form_widget(form.saturday) }}
+            {% if agenda.saturday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'saturday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}dimanche{% endtrans %}<br/>
+            {{ form_widget(form.sunday) }}
+            {% if agenda.sunday %}
+                {% include 'agenda/_form.agenda.semainePlageType.html.twig' with {'agenda':agenda,'day':'sunday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+    </div>
+    <span class="col-sm-12 text-right" >
+        <button id="save" type="submit" class="btn btn-primary " >{% trans %}Sauvegarder{% endtrans %} <span class="glyphicon glyphicon-record" ></span></button>
+    </span>       
+</fieldset>
+
+

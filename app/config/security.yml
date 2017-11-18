@@ -1,0 +1,49 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: plaintext
+#            algorithm: bcrypt
+    providers:
+        opac_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            http_basic: ~
+            provider: opac_provider
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: /controleuser   # route après le login
+            anonymous: true
+
+            logout:
+                path: /logout
+                target: / # route après le logout
+
+            remember_me:
+                secret: "%secret%"
+                lifetime: 2232000
+                path: ~
+                always_remember_me: true
+            guard:
+                authenticators:
+                    - app.token_authenticator            
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/agenda/.*, roles: IS_AUTHENTICATED_REMEMBERED  }
+        - { path: ^/company/.*, roles: IS_AUTHENTICATED_REMEMBERED  }
+        - { path: ^/semaine/.*, roles: IS_AUTHENTICATED_REMEMBERED  }
+        - { path: ^/rdv/.*, roles: IS_AUTHENTICATED_REMEMBERED  }

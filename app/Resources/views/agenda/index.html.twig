@@ -1,0 +1,41 @@
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-7">Liste des agendas</span>
+        </legend>
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                    <th>Durée</th>
+                    <th>Heure de début</th>
+                    <th>Heure de fin</th>                
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for agenda in agendas %}
+                    <tr class="text-center">
+                        <td><a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">{{ agenda.libelle }}</a></td>
+                        <td>{{ agenda.duration }}</td>
+                        <td>{% if agenda.heureDebut %}{{ agenda.heureDebut|date('H:i') }}{% endif %}</td>
+                        <td>{% if agenda.heureFin %}{{ agenda.heureFin|date('H:i') }}{% endif %}</td>
+                        <td>{% if agenda.monday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.tuesday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.wednesday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.thursday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.friday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.saturday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                        <td>{% if agenda.sunday %}<img src="{{ asset('media/icones/check.png') }}"/>{% else %}x{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</fieldset>

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block title %}ORL Chambery Rendez-vous 73 Savoie{% endblock %}
+
+{% block body %}
+    <div class="col-sm-10" style="margin-bottom: 1em">
+        Oto-Rhino-Laryngologiste médecin - chirurgien cervico-facial  <span><a href="#suite" data-toggle="collapse">.....</a></span>
+        <div id="suite" class="collapse" >
+            Spécialisé dans les domaines suivants :<br/>
+            Oreille – Audition – Équilibre – Acouphène – Nez et Sinus – Respiration – Odorat – Allergie – Gorge et cou – Glandes salivaires – Thyroïde – Voix – Chirurgie Esthétique – Oreilles – Nez – Visage
+        </div>
+    </div>
+    <div class="col-sm-2 text-right">
+        <a href="#" id="opener" ><img src="{{ asset('media/images/oreille.png') }}" alt="exit" class="img-responsive pull-right" /></a>
+    </div>
+    <div  class="panel-group" style="margin-bottom: 0;">
+        <div id="dialog" class="panel panel-success col-sm-2">
+            <div class="panel-heading">Connexion</div>
+            <div class="panel-body">
+                {{ form_start(form) }}
+                {{ form_row(form.username, {'full_name': '_username'}) }}
+                {{ form_row(form.password, {'full_name': '_password'}) }}
+                {{ form_errors(form) }}
+            </div>
+            <div class="panel-footer" style="min-height: 4em;">
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    {% for company in companies %}
+        {% include 'company/_show.identification.html.twig' with {'company':company,'_locale':app.request.locale } only %}   
+        <div class="clearfix "></div>
+        <div class="text-center col-sm-12 alert-success well" >
+            Pour prendre RV, cliquez sur le carré vert qui correspond à la plage de RV disponible qui vous intéresse
+        </div>
+        {% include 'company/_show.semaines.html.twig' with {'company':company,'_locale':app.request.locale } only %}  
+    {% endfor %}     
+
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $("#opener").on("click", function () {
+                $("#dialog").dialog("open");
+            });
+        });
+    </script>
+{% endblock %}
+

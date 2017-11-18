@@ -1,0 +1,37 @@
+<!-- semaine:_show.rdvs.html.twig -->
+{% set wdate = "" %}
+<div>
+{% for rdv in rdvs %}
+    {%  if rdv.dateHeureDebut | date('H') >12  and  type!="4Company" %}<span class="aprem /*hidden*/" >{% endif %}
+    {% set date = rdv.dateDebut %}
+    {% if (date != wdate) %}   
+        {% if wdate %}</div>{% endif %}
+    <div class="{% if type=="4Company" %}col-xs-1{% else %}col-sm-2 col-xs-3{% endif %} text-center" >
+{#        {{ rdv.dateDebut |  date('D',app.request.locale)}}<br/>  #}
+{#        {{ rdv.dateDebut |  date('D')}} #}
+        {{ rdv.dateDebut | localizeddate('full', 'none',app.request.locale,null, "EEEE") }}<br/>
+        <span>{{ rdv.dateDebut |  date('d/m')}}</span>
+    {% endif %}
+    <div style="padding:0.2em">
+        {% if type=="4Company" %}
+            {% include 'semaine/__show.rdvs.4company.htm.twig' with { 'rdv':rdv ,'semaine':semaine, '_locale':app.request.locale  } only %}
+        {% else %}
+            {% include 'semaine/__show.rdvs.4client.htm.twig' with { 'rdv':rdv ,'semaine':semaine, '_locale':app.request.locale  } only %}
+        {% endif %}
+    </div>
+    {% set wdate = rdv.dateDebut %}
+   {%  if rdv.dateHeureDebut | date('H') >12 %}</span >{% endif %}
+{% endfor %}
+{% if wdate %}</div>
+
+{% if false and type!="4Company" %}   
+<div id="show_aprem" class="text-center col-sm-8">
+    <hr/>
+    <a onclick="$('.aprem').removeClass('hidden');$('#show_aprem').addClass('hidden');">Voir l'apres midi</a>
+</div>
+{% endif %}
+</div>
+{% else %}
+Pas de rendez-vous possible
+{% endif %}
+

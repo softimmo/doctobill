@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/form_div_6.html.twig' %}
+
+{% block body %}
+    <fieldset>
+        <legend>
+            <h1>Modification  {% trans%}identification{% endtrans%} {{ affiliate.nom }}</h1>
+        </legend>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <hr/>
+        <div class="col-sm-12 text-center">
+            <input type="submit" value="Valider" class="btn btn-lg btn-success"/>
+        </div>
+        {{ form_end(form) }}
+    </fieldset>
+    <fieldset>
+        <legend>
+            <h1>{% trans%}Agendas de{% endtrans%} {{ affiliate.nom }}</h1>
+        </legend>
+            <table class="table table-striped">
+       {% for agenda in affiliate.agendas %}             
+           <tr>
+               <td><a href="{{ path('agenda_edit', { 'id': agenda.id }) }}"> {{ agenda.libelle }}</a></td>
+           </tr>
+        {% endfor %}
+        </table>
+     <a href="{{ path('agenda_new', { 'id': affiliate.id }) }}" class="btn btn-success">{% trans%}nouvel agenda type{% endtrans%}</a>
+    </fieldset>
+
+{% endblock %}

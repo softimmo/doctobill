@@ -1,0 +1,6 @@
+<!-- semaine:_lien.rdvs.semaine.html.twig -->
+{% if  semaine.rdvs is empty %}
+    <a href="{{ path('rdv_generate', { 'id': semaine.id }) }}">Générer les plages de rdv</a>
+{% else %}
+    <a href="{{ path('rdv_edit', {  'id': semaine.id ,'rdv_id':'new' }) }}">Voir les Rdv</a>
+{% endif %}

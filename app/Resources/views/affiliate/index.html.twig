@@ -1,0 +1,26 @@
+<fieldset>
+    <legend>
+        <h1>Liste des {% trans%}praticien{% endtrans%}s de la clinique <a href="{{ path('company_edit', { 'id': company.id }) }}">{{ company.nom }}</a></h1>
+    </legend>
+    <table class="table table-striped">
+        {% for affiliate in company.affiliates %}             
+            <tr>
+                <td><a href="{{ path('affiliate_edit', { 'id': affiliate.id }) }}"> {{ affiliate.nom }}</a></td>
+                <td>{{ affiliate.nomCourt }}</td>
+                <td>{{ affiliate.telephone }}</td>
+                <td>{{ affiliate.horaire }}</td>
+            </tr>
+            <tr>
+                <td class="text-right">Agendas</td>
+                <td>
+                    <ul>
+        {% for agenda in affiliate.agendas %}             
+            <li><a href="{{ path('agenda_edit', { 'id': agenda.id }) }}"> {{ agenda.libelle }}</a></li>
+        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('affiliate_new', { 'id': company.id }) }}" class="btn btn-success">{% trans%}nouveau pratitien{% endtrans%}</a>
+</fieldset>      

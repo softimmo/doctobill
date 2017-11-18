@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agenda</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>company</th>
+                <td>{{ agenda.companyId }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ agenda.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ agenda.duration }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ agenda.statut }}</td>
+            </tr>
+            <tr>
+                <th>Monday</th>
+                <td>{% if agenda.monday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tuesday</th>
+                <td>{% if agenda.tuesday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Wednesday</th>
+                <td>{% if agenda.wednesday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Thursday</th>
+                <td>{% if agenda.thursday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Friday</th>
+                <td>{% if agenda.friday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Saturday</th>
+                <td>{% if agenda.saturday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sunday</th>
+                <td>{% if agenda.sunday %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Heuredebut</th>
+                <td>{% if agenda.heureDebut %}{{ agenda.heureDebut|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Heurefin</th>
+                <td>{% if agenda.heureFin %}{{ agenda.heureFin|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if agenda.createdAt %}{{ agenda.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if agenda.updatedAt %}{{ agenda.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ agenda.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('agenda_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

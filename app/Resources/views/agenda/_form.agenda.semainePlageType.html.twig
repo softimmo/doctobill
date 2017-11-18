@@ -1,0 +1,37 @@
+{# agenda:_form.agenda.semainePlageType.html.twig #}
+{% if day=='base' %}
+    <div class="first-interval"></div>
+{%else %}
+    <div class="first-colonne"></div>
+{% endif %}
+    <div class="row">
+        {% set heureDebut = agenda.heureDebut %}
+        {% for i in 0..100 if heureDebut< agenda.heureFin %}
+            <div class="text-center interval">
+                {%if day=='base' %}
+                    <span class="form-control" > {{ heureDebut |date('H:i')}}</span>
+                {% else %}
+                    {% set checkedValue="" %}
+                    {% for semainePlageType in agenda.semainePlageTypes %}
+                        {% if day in semainePlageType.days and ( semainePlageType.debut|date('H:i'))==(heureDebut|date('H:i')) %} 
+                            {% set checkedValue="checked=checked" %} 
+                        {% endif %}
+                    {% endfor %}
+                    <input type="checkbox" class="form-control {{day}}"
+                           id="appbundle_agenda_{{ heureDebut |date('H:I')}}_{{ day }}" 
+                           name="appbundle_agenda_[{{ heureDebut |date('H:i')}}][{{ day }}]" {{checkedValue}} >
+                {% endif %}
+            </div>
+            {% set heureDebut = heureDebut|date_modify("+ "~agenda.duration~" minutes") %}
+        {% endfor %}
+    </div>
+    <script>        
+        $('#appbundle_agenda_{{day}}').click(function () {
+            if ( $('#appbundle_agenda_{{day}}').prop('checked') ) {
+                $('.{{day}}').prop('checked', true);
+            } else {
+                $('.{{day}}').prop('checked', false);
+            }
+        }
+        )
+    </script>

@@ -1,0 +1,63 @@
+.well {
+     min-height: 75px;   
+}
+.container {
+  /*  font-family: cursive;*/
+    color: #435f71;
+    font-size: 1.3em;
+}
+
+#frise {
+    background-image: url("../media/images/frise.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5em;
+    padding: 1em;
+}
+#navigation {
+    position: center;
+    height: 3em;
+}
+
+#slogan {
+    font-size: 2em;
+    color: white;
+/*    font-family: cursive; */
+}
+
+#menu {
+    width:75%;
+}
+#ident {
+    margin-top: -2em;
+    margin-right: 1em;
+    float : right;
+}
+#logo {
+    z-index: -1000;
+    margin-top: -6em;
+    margin-left: 2em;
+}
+
+.interval {
+    margin-bottom: 0.3em;
+}
+.first-interval {
+    margin-bottom: 5.1em;
+}
+.first-colonne {
+    margin-bottom: 1em;
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+}
+
+.panel {
+    border: 0px;
+}
+
+.form-bb {
+    padding-top: 2em;
+}

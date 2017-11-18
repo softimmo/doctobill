@@ -1,0 +1,65 @@
+{# semainePlage:edit.semainePlage.html.twig #}
+{{ form_start(form) }}
+    <div class="form-group ">
+        <label class="col-sm-offset-1 col-sm-2 text-right" >   
+            {% trans %} {% endtrans %}
+            {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'base','_locale':app.request.locale } only %}   
+        </label>
+        <label class="col-offset-sm-2 col-sm-1 text-left ">                
+            {% trans %}lundi{% endtrans %}<br/>
+            {{ form_widget(form.monday) }}
+            {% if agenda.monday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'monday','_locale':app.request.locale } only %}
+            {% endif %}             
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}mardi{% endtrans %}<br/>
+            {{ form_widget(form.tuesday) }}
+            {% if agenda.tuesday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'tuesday','_locale':app.request.locale } only %}
+            {% endif %}             
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}mercredi{% endtrans %}<br/>
+            {{ form_widget(form.wednesday) }}
+            {% if agenda.wednesday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'wednesday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}jeudi{% endtrans %}<br/>
+            {{ form_widget(form.thursday) }}
+            {% if agenda.thursday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'thursday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}vendredi{% endtrans %}<br/>
+            {{ form_widget(form.friday) }}
+            {% if agenda.friday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'friday','_locale':app.request.locale } only %}
+            {% endif %}       
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}samedi{% endtrans %}<br/>
+            {{ form_widget(form.saturday) }}
+            {% if agenda.saturday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'saturday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+        <label class="col-sm-1 text-left">                
+            {% trans %}dimanche{% endtrans %}<br/>
+            {{ form_widget(form.sunday) }}
+            {% if agenda.sunday %}
+                {% include 'semainePlage/_form.jour.semainePlage.html.twig' with {'semaine':semaine,'semainePlageTypes':semainePlageTypes,'day':'sunday','_locale':app.request.locale } only %}
+            {% endif %}
+        </label>
+    </div>
+        
+    <span class="col-sm-offset-2 col-sm-10" >
+        <button id="save" type="submit" class="btn btn-success btn-lg" >{% trans %}Generer les rendez-vous possible de la semaine{% endtrans %} <span class="glyphicon glyphicon-record" ></span></button>
+    </span>       
+</fieldset>
+{{ form_end(form) }}
+
+

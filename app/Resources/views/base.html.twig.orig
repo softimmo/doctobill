@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="Gestion Enquetes Opac">
+        <meta name="author" content="soft.immo">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>{% block title %}Enquetes{% endblock %}</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" >
+        <link href="{{ asset('/css/enquete.css') }}" rel="stylesheet" >
+        
+    {% block stylesheets %}{% endblock %}
+        <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+        <script src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
+        <script>
+            jQuery(document).ready(function() {
+                 $('.js-datepicker').datepicker();
+            });
+        </script>       
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+     <div id="header"  >    
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div class="tabbable bandeau" >
+          <div class="nav-inner"> 
+            <ul class="nav nav-tabs">
+                <li ><a style="padding:5px 0px 0px 0px; margin-left:15px" 
+                        href="{{ path('logout') }}"><img src="{{ asset('/media/icones/exit.png') }}" alt="exit" /></a>
+                </li>{{ app.user.username }}
+                <li>
+             </ul>
+           </div> 
+        </div> 
+        {% endif %} 
+    </div>
+    <div id="frise"  > 
+    </div>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-12">
+            {% if error is defined %}<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>{% endif %}    
+    <br><br><br>
+    {% for flash_message in app.session.flashbag.get('notice') %}
+    <div class="alert alert-success">{{flash_message}}</div>
+    {% endfor %} 
+     
+       {% for flash_message in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger">{{flash_message}}</div>
+    {% endfor %}
+     {% block body %}{% endblock %}   
+    </div>   
+    </div>
+    </div><!-- /.container -->
+            
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>

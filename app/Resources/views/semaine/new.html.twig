@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/form_sans_div.html.twig' %}
+
+{% block body %}
+    <fieldset class="col-sm-12">
+        <legend class="well" >
+            <span class="col-sm-1"><img src="{{ asset('media/icones/calendar.png') }}" alt="" /></span>
+            <span class="col-sm-11">Création d'une semaine sur l'agenda {{ agenda.libelle }} de {{ agenda.affiliate.nom }}</span>
+        </legend>
+    {% include 'semaine/_form.semaine.html.twig' with { 'form':form, 'semaine':semaine , '_locale':app.request.locale  } only %}
+    </fieldset>
+
+    <div class="col-sm-4">
+            <a href="{{ path('semaine_index', { 'id': agenda.affiliate.company.id }) }}">Retour vers la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!-- company/_show.semaines.html.twig -->
+{% set paire='paire' %}
+{% for semaine in company.semaineAvenirs %}
+    {% if not semaine.rdvs is empty %}
+            {% if paire=='paire' %}{% set paire='impaire' %}
+            <div class="row">
+            {% else %}{% set paire='paire' %}  
+            {% endif %}  
+            <div class="panel panel-primary col-sm-6 list-group">
+                <div class="panel-heading">
+                    <div>{{ semaine.agenda.affiliate.nom }}</div> 
+                    <div>Rendez-vous possibles pour la semaine {{ semaine.numero }} du {{ semaine.dateDebut | date('d/m/Y')}} </div>
+                </div>
+                <div class="panel-body" style="background-color: lightcyan;">
+                    {% include 'semaine/_show.rdvs.html.twig' with { 'rdvs':semaine.rdvs, 'semaine':semaine ,'type':'4Client','_locale':app.request.locale  } only %}
+                </div>
+            </div>
+            {% if paire=='paire' %}
+            </div>
+            {% endif %}     
+    {% endif %}     
+{% endfor %}     
