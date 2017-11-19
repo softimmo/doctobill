@@ -9,3 +9,4 @@ parameters:
     mailer_host: ~
     mailer_user: ~
     mailer_password: ~
+    secret: ThisTokenIsNotSoSecretChangeItAsYouWant   
