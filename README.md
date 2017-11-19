@@ -15,7 +15,7 @@ Ce projet <a href="https://symfony.com">symfony</a> fournit une application simp
 <h2>Pour une installation locale :</h2>
 <ul>
     <li>Cloner le projet par un git clone ou par download</li>
-    <li>Créer la base de donnée et executer le script de création des tables (doctobill.sql)</li>
+    <li>Créer la base de données et executer le script de création des tables (doctobill.sql)</li>
     <li>Modifier le fichier app\config\parameter.yml pour personnaliser vos propriétés de base de données et les adresses email de réception</li>
     <li>Si nécessaire : Dans une console Faire un  <a href="https://symfony.com/blog/upgrading-your-symfony-projects-the-easy-way">composer update</a> pour disposer des dernières versions des bundles symfony</li>
 </ul>
@@ -23,10 +23,10 @@ Ce projet <a href="https://symfony.com">symfony</a> fournit une application simp
 <h2>Le projet est livré avec 2 utilisateurs</h2>
 <ul>
   <li>Admnistrateur : admin/admin     
-  <br>Permet de gérer l'ensemble du site : sociétés, utilisateurs,calendriers, spécialités ou localisations etc... 
+  <br>Permet de gérer l'ensemble du site : sociétés, utilisateurs, calendriers, spécialités ou localisations etc... 
   </li>
   <li>Gestionnaire : gestion1/gestion1     
-  <br>Permet de gérer la société associé : utilisateurs, calendriers, spécialités ou localisations  etc...
+  <br>Permet de gérer la société associée : utilisateurs, calendriers, spécialités ou localisations  etc...
   </li> 
 </ul>
 
