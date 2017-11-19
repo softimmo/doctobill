@@ -16,8 +16,8 @@ use JMS\Serializer\Annotation\Expose;
  */
 class User  implements UserInterface, \Serializable
 {
-    public static $_ROLE_ADMIN                            = 'ROLE_ADMIN';    // admin total */
-    public static $_ROLE_GESTIONNAIRE_ADMIN   = 'ROLE_GESTIONNAIRE_ADMIN'; /* admin de sa company    */
+    public static $_ROLE_ADMIN                            = 'ROLE_ADMIN';    /* admin total */
+    public static $_ROLE_GESTIONNAIRE_ADMIN   = 'ROLE_GESTIONNAIRE_ADMIN'; /* admin de sa clinique    */
     public static $_ROLE_GESTIONNAIRE               = 'ROLE_GESTIONNAIRE';  /*  gestionnaire = secretaire */
     /**
      * @ORM\Column(type="integer")
