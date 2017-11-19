@@ -16,6 +16,9 @@ use JMS\Serializer\Annotation\Expose;
  */
 class User  implements UserInterface, \Serializable
 {
+    public static $_ROLE_ADMIN                            = 'ROLE_ADMIN';    // admin total */
+    public static $_ROLE_GESTIONNAIRE_ADMIN   = 'ROLE_GESTIONNAIRE_ADMIN'; /* admin de sa company    */
+    public static $_ROLE_GESTIONNAIRE               = 'ROLE_GESTIONNAIRE';  /*  gestionnaire = secretaire */
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -72,12 +75,17 @@ class User  implements UserInterface, \Serializable
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;    
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="array", nullable=false)
+     */
     private $roles;
     
     public function __construct()
     {
         // De base, on va attribuer au nouveau utilisateur, le rôle « ROLE_USER »
-        $this->roles = array("ROLE_USER");
+       $this->roles = array("ROLE_USER");
         // Chaque utilisateur va se voir attribuer une clé permettant 
         // de saler son mot de passe. Cela n'est pas obligatoire,
         // on pourrait mettre $salt à null
@@ -124,11 +132,32 @@ class User  implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return array("ROLE_USER");
-        // return array($this->roles);
+        return $this->roles;
     }
 
+   public function addRole($role)
+    {
+        $role = strtoupper($role);
+/*        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
+*/
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
 
+        return $this;
+    }    
+
+    public function removeRole($role)
+    {
+        if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
+            unset($this->roles[$key]);
+            $this->roles = array_values($this->roles);
+        }
+
+        return $this;
+    }    
     public function eraseCredentials()
     {
         $this->plainPassword = null;

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>UserName</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in companies %}
+            <tr>
+                <td>{{ user.id}}</td>
+                <td>{{ user.username}}</td>
+                <td>{% if user.createdAt %}{{ user.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if user.updatedAt %}{{ user.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('roles_edit', { 'id': user.id }) }}">
+                        <ul>
+                        {% for role in  user.roles %}
+                         <li>{{ role }}</li>
+                         {% endfor%}
+                        </ul>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+{% endblock %}
