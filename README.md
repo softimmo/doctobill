@@ -1,12 +1,11 @@
-# doctobill
 
 <article class="markdown-body entry-content" itemprop="text">
 <p align="center">
-Doctobill : Rdv par internet
+# Doctobill : Rdv par internet
 </article>
 
-Ce projet <a href="https://symfony.com">symfony</a> fournit une application simple de rendez-vous.
-<h2>L'application se compose en 2 Parties :
+<h1>Ce projet <a href="https://symfony.com">symfony</a> fournit une application simple de rendez-vous.</h1>
+<h2>L'application se compose en 2 Parties :</h2>
 <ul>
     <li>Le back-end (connexion privé) définit les rendez-vous possibles</li>
     <li>Le front-end permet aux clients de prendre rendez-vous sur les plages disponibles définis par le back-end</li>
